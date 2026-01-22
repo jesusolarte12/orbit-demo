@@ -57,7 +57,6 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Ingrese su correo electrónico"
                   className="orbit-input w-full pl-12"
-                  required
                 />
               </div>
             </div>
@@ -74,7 +73,6 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Ingrese su contraseña"
                   className="orbit-input w-full pl-12"
-                  required
                 />
               </div>
             </div>
