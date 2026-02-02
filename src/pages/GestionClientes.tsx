@@ -12,15 +12,17 @@ export default function GestionClientes() {
   const [comercialFilter, setComercialFilter] = useState('Comercial');
   const [prioridadFilter, setPrioridadFilter] = useState('Prioridad');
   const [interesStates, setInteresStates] = useState<Record<string, string>>({});
-  
+
   const itemsPerPage = 10;
 
   const filteredClientes = clientesMock.filter(cliente => {
     const matchesSearch = cliente.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         cliente.telefono.includes(searchTerm);
-    const matchesSede = sedeFilter === 'Sedes' || sedeFilter === 'Todas' || cliente.sede === sedeFilter;
+      cliente.telefono.includes(searchTerm) ||
+      cliente.cedula.includes(searchTerm);
+    const matchesSede = sedeFilter === 'Sedes' || sedeFilter === 'Todas' || cliente.ciudad === sedeFilter;
     const matchesComercial = comercialFilter === 'Comercial' || comercialFilter === 'Todos' || cliente.comercial === comercialFilter;
-    return matchesSearch && matchesSede && matchesComercial;
+    const matchesPrioridad = prioridadFilter === 'Prioridad' || prioridadFilter === 'Todas' || cliente.prioridad === prioridadFilter;
+    return matchesSearch && matchesSede && matchesComercial && matchesPrioridad;
   });
 
   const totalPages = Math.ceil(filteredClientes.length / itemsPerPage);
@@ -35,15 +37,15 @@ export default function GestionClientes() {
 
   const getInteresDisplay = (cliente: typeof clientesMock[0]) => {
     const currentInteres = interesStates[cliente.id] || cliente.estadoInteres;
-    
+
     if (!currentInteres) return null;
-    
+
     const config: Record<string, { text: string; className: string }> = {
       interesado: { text: '♡ interesado', className: 'text-primary' },
       no_interesado: { text: '♡ no interes...', className: 'text-destructive' },
       no_contesto: { text: '♡ no contest...', className: 'text-destructive' },
     };
-    
+
     return config[currentInteres];
   };
 
@@ -64,7 +66,7 @@ export default function GestionClientes() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Buscar clientes..."
+              placeholder="Buscar por nombre, tel o cédula..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="orbit-input pl-10 w-64"
@@ -112,67 +114,60 @@ export default function GestionClientes() {
           <table className="orbit-table">
             <thead>
               <tr>
-                <th>Estado</th>
-                <th>Usuario ⇅</th>
-                <th>Teléfono ⇅</th>
-                <th>Sede ⇅</th>
-                <th>Seguimiento</th>
-                <th>Últ. Interacción ⇅</th>
-                <th>Edo. Llamada</th>
-                <th>N° Llamadas</th>
-                <th>Fecha Llamada ⇅</th>
+                <th>Usuario</th>
+                <th>Teléfono</th>
+                <th>Cédula</th>
+                <th>Tiene prioridad</th>
+                <th>Tiene hijos</th>
+                <th>Ciudad</th>
+                <th>Últ. Interacción</th>
+                <th>Situación laboral</th>
+                <th>Empresa</th>
+                <th>Ref política</th>
+                <th>Voto</th>
+                <th>Barrio</th>
+                <th>Profesión</th>
+                <th>Preocupaciones</th>
+                <th>Intereses</th>
                 <th>Edo. Interés</th>
+                <th>Comercial</th>
+                <th>Prioridad</th>
               </tr>
             </thead>
             <tbody>
               {paginatedClientes.map((cliente, index) => {
                 const interesDisplay = getInteresDisplay(cliente);
-                
+
                 return (
                   <tr key={cliente.id} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
                     <td>
-                      <span className="orbit-badge-muted text-xs">
-                        ⏱ {cliente.estado === 'registrado' ? 'Registrado' : 'No registrado'}
-                      </span>
-                    </td>
-                    <td>
                       <span className="text-primary hover:underline cursor-pointer">{cliente.nombre}</span>
                     </td>
-                    <td className="text-muted-foreground">
-                      <div className="flex gap-1">
-                        {cliente.telefono.split(' ').map((part, i) => (
-                          <span key={i} className="bg-muted px-1.5 py-0.5 rounded text-xs">{part}</span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="text-muted-foreground">{cliente.sede}</td>
-                    <td>
-                      <div className="flex justify-center">
-                        <div className={cn(
-                          "w-5 h-5 rounded-full border-2",
-                          cliente.seguimiento ? "bg-primary border-primary" : "border-muted-foreground"
-                        )} />
-                      </div>
-                    </td>
-                    <td className="text-muted-foreground">{cliente.ultimaInteraccion}</td>
-                    <td>
-                      {cliente.estadoLlamada === 'contactado' ? (
-                        <span className="orbit-badge-success">
-                          <Phone className="h-3 w-3" />
-                          Contactado
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-1.5 text-muted-foreground text-sm">
-                          <PhoneOff className="h-3.5 w-3.5" />
-                          No contactado
-                        </span>
+                    <td className="text-muted-foreground whitespace-nowrap">{cliente.telefono}</td>
+                    <td className="text-muted-foreground">{cliente.cedula}</td>
+                    <td className="text-center">
+                      {cliente.tienePrioridad && (
+                        <span className="orbit-badge-danger">Alta</span>
                       )}
                     </td>
-                    <td className="text-center">{String(cliente.numLlamadas).padStart(3, '0')}</td>
-                    <td className="text-muted-foreground">{cliente.fechaLlamada || 'N/A'}</td>
+                    <td className="text-center">{cliente.tieneHijos}</td>
+                    <td className="text-muted-foreground">{cliente.ciudad}</td>
+                    <td className="text-muted-foreground whitespace-nowrap">{cliente.ultimaInteraccion}</td>
+                    <td className="text-muted-foreground">{cliente.situacionLaboral}</td>
+                    <td className="text-muted-foreground">{cliente.empresa}</td>
+                    <td className="text-muted-foreground">{cliente.refPolitica}</td>
+                    <td className="text-muted-foreground">{cliente.voto}</td>
+                    <td className="text-muted-foreground">{cliente.barrio}</td>
+                    <td className="text-muted-foreground">{cliente.profesion}</td>
+                    <td className="text-muted-foreground max-w-[150px] truncate" title={cliente.preocupaciones}>
+                      {cliente.preocupaciones}
+                    </td>
+                    <td className="text-muted-foreground max-w-[150px] truncate" title={cliente.intereses}>
+                      {cliente.intereses}
+                    </td>
                     <td>
                       {interesDisplay ? (
-                        <button 
+                        <button
                           className={cn("flex items-center gap-1 text-sm", interesDisplay.className)}
                           onClick={() => handleInteresChange(cliente.id, cliente.estadoInteres === 'interesado' ? 'no_interesado' : 'interesado')}
                         >
@@ -192,13 +187,24 @@ export default function GestionClientes() {
                         </select>
                       )}
                     </td>
+                    <td className="text-muted-foreground whitespace-nowrap">{cliente.comercial}</td>
+                    <td>
+                      <span className={cn(
+                        "px-2 py-0.5 rounded text-xs font-medium",
+                        cliente.prioridad === 'Alta' ? "bg-destructive/20 text-destructive border border-destructive/20" :
+                          cliente.prioridad === 'Media' ? "bg-warning/20 text-warning border border-warning/20" :
+                            "bg-success/20 text-success border border-success/20"
+                      )}>
+                        {cliente.prioridad}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-        
+
         <div className="p-4 border-t border-border">
           <Pagination
             currentPage={currentPage}

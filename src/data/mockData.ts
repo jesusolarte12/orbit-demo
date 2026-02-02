@@ -4,15 +4,28 @@ export interface Cliente {
   id: string;
   nombre: string;
   telefono: string;
-  sede: string;
+  cedula: string;
+  tienePrioridad: boolean;
+  tieneHijos: 'Si' | 'No';
+  ciudad: string;
   ultimaInteraccion: string;
+  situacionLaboral: string;
+  empresa: string;
+  refPolitica: string;
+  voto: string;
+  barrio: string;
+  profesion: string;
+  preocupaciones: string;
+  intereses: string;
+  estadoInteres: 'interesado' | 'no_interesado' | 'no_contesto' | null;
+  comercial: string;
+  prioridad: 'Alta' | 'Media' | 'Baja';
+  sede: string;
   estadoLlamada: 'contactado' | 'no_contactado';
   numLlamadas: number;
   fechaLlamada: string | null;
-  estadoInteres: 'interesado' | 'no_interesado' | 'no_contesto' | null;
   estado: 'registrado' | 'no_registrado';
   seguimiento: boolean;
-  comercial: string;
   notas: string;
   edad: string;
   fechaRegistro: string;
@@ -66,21 +79,156 @@ export interface DashboardStats {
 
 // Clientes Mock Data
 export const clientesMock: Cliente[] = [
-  { id: '1', nombre: 'Jose David Pelaez', telefono: '312 456 7890', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 17:57', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: null, estado: 'no_registrado', seguimiento: false, comercial: 'Victor Guzmán', notas: '', edad: 'N/A', fechaRegistro: '2025-12-16' },
-  { id: '2', nombre: 'Nicolás Pedraza', telefono: '315 789 1234', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 17:42', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: null, estado: 'no_registrado', seguimiento: false, comercial: 'Victor Guzmán', notas: '', edad: 'N/A', fechaRegistro: '2025-12-01' },
-  { id: '3', nombre: 'Aldair', telefono: '320 111 2222', sede: 'Bucaramanga', ultimaInteraccion: '2026-01-14 16:32', estadoLlamada: 'contactado', numLlamadas: 2, fechaLlamada: '2025-11-12', estadoInteres: 'no_interesado', estado: 'no_registrado', seguimiento: true, comercial: 'Victor Guzmán', notas: '', edad: 'N/A', fechaRegistro: '2025-12-01' },
-  { id: '4', nombre: 'Oscar Araque', telefono: '318 333 4444', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 15:35', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: null, estado: 'no_registrado', seguimiento: false, comercial: 'Diana Margarita', notas: '', edad: 'N/A', fechaRegistro: '2025-11-27' },
-  { id: '5', nombre: 'Sebastian', telefono: '317 555 6666', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 15:06', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: null, estado: 'no_registrado', seguimiento: false, comercial: 'Juan Sebastian', notas: '', edad: 'N/A', fechaRegistro: '2025-11-27' },
-  { id: '6', nombre: 'ARKADE', telefono: '310 777 8888', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 14:57', estadoLlamada: 'contactado', numLlamadas: 1, fechaLlamada: '2025-11-20', estadoInteres: 'interesado', estado: 'no_registrado', seguimiento: false, comercial: 'Victor Guzmán', notas: '', edad: 'N/A', fechaRegistro: '2025-11-20' },
-  { id: '7', nombre: 'Felipe Durango', telefono: '319 999 0000', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 14:16', estadoLlamada: 'contactado', numLlamadas: 1, fechaLlamada: '2025-12-10', estadoInteres: 'no_contesto', estado: 'no_registrado', seguimiento: false, comercial: 'Mafe', notas: '', edad: 'N/A', fechaRegistro: '2025-11-19' },
-  { id: '8', nombre: 'Que', telefono: '321 123 4567', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 14:05', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: null, estado: 'no_registrado', seguimiento: false, comercial: 'John Comercial', notas: '', edad: 'N/A', fechaRegistro: '2025-11-12' },
-  { id: '9', nombre: 'Usuario desconocido', telefono: '322 234 5678', sede: 'Desconocido', ultimaInteraccion: '2026-01-14 13:38', estadoLlamada: 'contactado', numLlamadas: 1, fechaLlamada: '2025-09-22', estadoInteres: 'no_contesto', estado: 'no_registrado', seguimiento: false, comercial: 'Victor Guzmán', notas: '', edad: 'N/A', fechaRegistro: '2025-09-22' },
-  { id: '10', nombre: 'Oscar Ortega', telefono: '323 345 6789', sede: 'Bogotá', ultimaInteraccion: '2026-01-13 12:30', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: 'interesado', estado: 'registrado', seguimiento: true, comercial: 'Victor Guzmán', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-12-16' },
-  { id: '11', nombre: 'Kenthomakentheking', telefono: '324 456 7890', sede: 'Medellín', ultimaInteraccion: '2026-01-12 11:20', estadoLlamada: 'contactado', numLlamadas: 3, fechaLlamada: '2025-12-15', estadoInteres: 'interesado', estado: 'registrado', seguimiento: true, comercial: 'Victor Guzmán', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-12-01' },
-  { id: '12', nombre: 'MARISOL', telefono: '325 567 8901', sede: 'Cali', ultimaInteraccion: '2026-01-11 10:15', estadoLlamada: 'contactado', numLlamadas: 2, fechaLlamada: '2025-12-14', estadoInteres: 'interesado', estado: 'no_registrado', seguimiento: true, comercial: 'Victor Guzmán', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-12-01' },
-  { id: '13', nombre: 'Colmedica', telefono: '326 678 9012', sede: 'Cartagena', ultimaInteraccion: '2026-01-10 09:00', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: 'interesado', estado: 'registrado', seguimiento: true, comercial: 'Victor Guzmán', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-12-01' },
-  { id: '14', nombre: 'Juan Diego Colmenares', telefono: '327 789 0123', sede: 'Barranquilla', ultimaInteraccion: '2026-01-09 08:45', estadoLlamada: 'contactado', numLlamadas: 1, fechaLlamada: '2025-12-13', estadoInteres: 'no_contesto', estado: 'no_registrado', seguimiento: true, comercial: 'Diana Margarita', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-11-27' },
-  { id: '15', nombre: 'Yuly Tavera', telefono: '328 890 1234', sede: 'Pereira', ultimaInteraccion: '2026-01-08 07:30', estadoLlamada: 'no_contactado', numLlamadas: 0, fechaLlamada: null, estadoInteres: 'no_interesado', estado: 'registrado', seguimiento: true, comercial: 'Mafe', notas: 'Sin comentarios', edad: 'N/A', fechaRegistro: '2025-11-19' },
+  {
+    id: '1',
+    nombre: 'Jose David Pelaez',
+    telefono: '312 456 7890',
+    cedula: '1.098.765.432',
+    tienePrioridad: true,
+    tieneHijos: 'No',
+    ciudad: 'Bucaramanga',
+    ultimaInteraccion: '2026-01-14 17:57',
+    situacionLaboral: 'Empleado',
+    empresa: 'Tech Solutions',
+    refPolitica: 'N/A',
+    voto: 'Pendiente',
+    barrio: 'Cabecera',
+    profesion: 'Ingeniero',
+    preocupaciones: 'Educación',
+    intereses: 'Tecnología',
+    estadoInteres: null,
+    comercial: 'Victor Guzmán',
+    prioridad: 'Alta',
+    sede: 'Bucaramanga',
+    estadoLlamada: 'no_contactado',
+    numLlamadas: 0,
+    fechaLlamada: null,
+    estado: 'no_registrado',
+    seguimiento: false,
+    notas: '',
+    edad: '25',
+    fechaRegistro: '2025-12-16'
+  },
+  {
+    id: '2',
+    nombre: 'Nicolás Pedraza',
+    telefono: '315 789 1234',
+    cedula: '1.012.345.678',
+    tienePrioridad: false,
+    tieneHijos: 'Si',
+    ciudad: 'Bogotá',
+    ultimaInteraccion: '2026-01-14 17:42',
+    situacionLaboral: 'Independiente',
+    empresa: 'Propia',
+    refPolitica: 'N/A',
+    voto: 'Si',
+    barrio: 'Chicó',
+    profesion: 'Abogado',
+    preocupaciones: 'Seguridad',
+    intereses: 'Finanzas',
+    estadoInteres: null,
+    comercial: 'Victor Guzmán',
+    prioridad: 'Media',
+    sede: 'Bogotá',
+    estadoLlamada: 'no_contactado',
+    numLlamadas: 0,
+    fechaLlamada: null,
+    estado: 'no_registrado',
+    seguimiento: false,
+    notas: '',
+    edad: '32',
+    fechaRegistro: '2025-12-01'
+  },
+  {
+    id: '3',
+    nombre: 'Aldair',
+    telefono: '320 111 2222',
+    cedula: '1.045.678.901',
+    tienePrioridad: false,
+    tieneHijos: 'No',
+    ciudad: 'Bucaramanga',
+    ultimaInteraccion: '2026-01-14 16:32',
+    situacionLaboral: 'Desempleado',
+    empresa: 'N/A',
+    refPolitica: 'Amigo',
+    voto: 'No',
+    barrio: 'Real de Minas',
+    profesion: 'Estudiante',
+    preocupaciones: 'Empleo',
+    intereses: 'Deportes',
+    estadoInteres: 'no_interesado',
+    comercial: 'Victor Guzmán',
+    prioridad: 'Baja',
+    sede: 'Bucaramanga',
+    estadoLlamada: 'contactado',
+    numLlamadas: 2,
+    fechaLlamada: '2025-11-12',
+    estado: 'no_registrado',
+    seguimiento: true,
+    notas: '',
+    edad: '21',
+    fechaRegistro: '2025-12-01'
+  },
+  {
+    id: '4',
+    nombre: 'Oscar Araque',
+    telefono: '318 333 4444',
+    cedula: '1.056.789.012',
+    tienePrioridad: true,
+    tieneHijos: 'Si',
+    ciudad: 'Medellín',
+    ultimaInteraccion: '2026-01-14 15:35',
+    situacionLaboral: 'Empleado',
+    empresa: 'Global Corp',
+    refPolitica: 'N/A',
+    voto: 'Si',
+    barrio: 'El Poblado',
+    profesion: 'Administrador',
+    preocupaciones: 'Movilidad',
+    intereses: 'Música',
+    estadoInteres: null,
+    comercial: 'Diana Margarita',
+    prioridad: 'Alta',
+    sede: 'Medellín',
+    estadoLlamada: 'no_contactado',
+    numLlamadas: 0,
+    fechaLlamada: null,
+    estado: 'no_registrado',
+    seguimiento: false,
+    notas: '',
+    edad: '40',
+    fechaRegistro: '2025-11-27'
+  },
+  {
+    id: '5',
+    nombre: 'Sebastian',
+    telefono: '317 555 6666',
+    cedula: '1.067.890.123',
+    tienePrioridad: false,
+    tieneHijos: 'No',
+    ciudad: 'Cali',
+    ultimaInteraccion: '2026-01-14 15:06',
+    situacionLaboral: 'Estudiante',
+    empresa: 'N/A',
+    refPolitica: 'Facebook',
+    voto: 'Pendiente',
+    barrio: 'San Fernando',
+    profesion: 'Diseñador',
+    preocupaciones: 'Medio Ambiente',
+    intereses: 'Arte',
+    estadoInteres: null,
+    comercial: 'Juan Sebastian',
+    prioridad: 'Media',
+    sede: 'Cali',
+    estadoLlamada: 'no_contactado',
+    numLlamadas: 0,
+    fechaLlamada: null,
+    estado: 'no_registrado',
+    seguimiento: false,
+    notas: '',
+    edad: '23',
+    fechaRegistro: '2025-11-27'
+  },
 ];
 
 // Usuarios Mock Data
@@ -214,13 +362,13 @@ export const dashboardStatsMock: DashboardStats = {
 // Chart data for dashboard
 export const chartDataMock = {
   barChart: [
-    { fecha: '8 Jul', usuariosTotales: 25, usuariosRegistrados: 20 },
-    { fecha: '9 Jul', usuariosTotales: 22, usuariosRegistrados: 18 },
-    { fecha: '10 Jul', usuariosTotales: 40, usuariosRegistrados: 35 },
-    { fecha: '11 Jul', usuariosTotales: 65, usuariosRegistrados: 55 },
-    { fecha: '12 Jul', usuariosTotales: 90, usuariosRegistrados: 95 },
-    { fecha: '13 Jul', usuariosTotales: 10, usuariosRegistrados: 35 },
-    { fecha: '14 Jul', usuariosTotales: 30, usuariosRegistrados: 25 },
+    { fecha: '8 Jul', usuariosTotales: 25, usuariosNuevos: 12 },
+    { fecha: '9 Jul', usuariosTotales: 22, usuariosNuevos: 15 },
+    { fecha: '10 Jul', usuariosTotales: 40, usuariosNuevos: 28 },
+    { fecha: '11 Jul', usuariosTotales: 65, usuariosNuevos: 42 },
+    { fecha: '12 Jul', usuariosTotales: 90, usuariosNuevos: 55 },
+    { fecha: '13 Jul', usuariosTotales: 10, usuariosNuevos: 8 },
+    { fecha: '14 Jul', usuariosTotales: 30, usuariosNuevos: 20 },
   ],
   pieChart: [
     { name: '25/07-09', value: 189, color: '#3b82f6' },

@@ -31,7 +31,7 @@ export default function Dashboard() {
         <button className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg text-sm">
           Últimos 15 Días
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="m6 9 6 6 6-6"/>
+            <path d="m6 9 6 6 6-6" />
           </svg>
         </button>
         <button className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg text-sm">
@@ -39,8 +39,8 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Stats Grid - Row 1 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <StatCard
           icon={<Users className="h-5 w-5" />}
           value={stats.usuariosTotales}
@@ -53,59 +53,6 @@ export default function Dashboard() {
           label="Usuarios Nuevos"
           sublabel="Primera vez interactuando"
         />
-        <StatCard
-          icon={<UserCheck className="h-5 w-5" />}
-          value={stats.usuariosRegistrados}
-          label="Usuarios Registrados"
-          sublabel="Completaron registro"
-        />
-        <StatCard
-          icon={<TrendingUp className="h-5 w-5" />}
-          value={`${stats.tasaConversion}%`}
-          label="Tasa de Conversión"
-          sublabel="Porcentaje de usuarios registrados"
-          valueColor="text-primary"
-        />
-        <StatCard
-          icon={<Eye className="h-5 w-5" />}
-          value={stats.sinRespuesta}
-          label="Sin Respuesta"
-          sublabel="Sin interacción"
-        />
-        <StatCard
-          icon={<Eye className="h-5 w-5" />}
-          value={stats.noContesto}
-          label="No Contestó"
-          sublabel="Interacción baja"
-        />
-        <StatCard
-          icon={<MessageCircle className="h-5 w-5" />}
-          value={stats.noInteresados}
-          label="No Interesados"
-          sublabel="Interacción media"
-        />
-      </div>
-
-      {/* Stats Grid - Row 2 */}
-      <div className="grid grid-cols-3 gap-4">
-        <StatCard
-          icon={<Heart className="h-5 w-5" />}
-          value={stats.interesados}
-          label="Interesados"
-          sublabel="Alta interacción"
-        />
-        <StatCard
-          icon={<PhoneOff className="h-5 w-5" />}
-          value={stats.noContactados}
-          label="No Contactados"
-          sublabel="Llamadas no realizadas"
-        />
-        <StatCard
-          icon={<Phone className="h-5 w-5" />}
-          value={stats.contactados}
-          label="Contactados"
-          sublabel="Llamadas realizadas"
-        />
       </div>
 
       {/* Charts */}
@@ -117,16 +64,15 @@ export default function Dashboard() {
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis dataKey="fecha" stroke="hsl(var(--muted-foreground))" fontSize={12} />
               <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--card))', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'hsl(var(--card))',
                   border: '1px solid hsl(var(--border))',
                   borderRadius: '8px'
                 }}
               />
               <Legend />
-              <Bar dataKey="usuariosTotales" name="Usuarios Totales" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="usuariosRegistrados" name="Usuarios Registrados" fill="#0ea5e9" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="usuariosNuevos" name="Usuarios Nuevos" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -149,9 +95,9 @@ export default function Dashboard() {
                 ))}
               </Pie>
               <Legend />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--card))', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'hsl(var(--card))',
                   border: '1px solid hsl(var(--border))',
                   borderRadius: '8px'
                 }}
