@@ -2,13 +2,20 @@ import { ChevronDown } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
+type Option = {
+  value: string;
+  label: string;
+};
+
+
 interface SelectOrbitProps {
   value: string;
   onChange: (value: string) => void;
-  options: string[];
+  options: string[] | Option[];
   placeholder?: string;
   className?: string;
 }
+
 
 export function SelectOrbit({ value, onChange, options, placeholder = 'Seleccionar', className }: SelectOrbitProps) {
   const [isOpen, setIsOpen] = useState(false);

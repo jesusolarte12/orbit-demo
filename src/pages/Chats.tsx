@@ -110,8 +110,12 @@ export default function Chats() {
                 onChange={(e) => setSelectedComercial(e.target.value)}
                 className="bg-transparent border border-border rounded px-2 py-1 text-sm"
               >
-                {comercialesOptions.filter(c => c !== 'Todos').map(comercial => (
-                  <option key={comercial} value={comercial}>{comercial}</option>
+              {comercialesOptions
+                .filter(c => c.value !== 'Todos')
+                .map(c => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
                 ))}
               </select>
             </div>

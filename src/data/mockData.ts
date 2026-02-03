@@ -127,15 +127,15 @@ export const clientesMock: Cliente[] = [
     profesion: 'Ingeniero',
     preocupaciones: 'Educación',
     intereses: 'Tecnología',
-    estadoInteres: null,
-    comercial: 'Victor Guzmán',
-    prioridad: 'Alta',
-    sede: 'Bucaramanga',
-    estadoLlamada: 'no_contactado',
-    numLlamadas: 0,
-    fechaLlamada: null,
-    estado: 'no_registrado',
-    seguimiento: false,
+    estadoInteres: null,            
+    comercial: 'Victor Guzmán',      
+    prioridad: 'Alta',               
+    sede: 'Bucaramanga',             
+    estadoLlamada: 'no_contactado',  
+    numLlamadas: 0,                   
+    fechaLlamada: null,               
+    estado: 'no_registrado',          
+    seguimiento: false,              
     notas: '',
     edad: '25',
     fechaRegistro: '2025-12-16'
@@ -259,7 +259,7 @@ export const clientesMock: Cliente[] = [
     notas: '',
     edad: '23',
     fechaRegistro: '2025-11-27'
-  },
+  }
 ];
 
 // Usuarios Mock Data
@@ -415,11 +415,21 @@ export const chartDataMock = {
 // Sedes options
 export const sedesOptions = ['Todas', 'Bucaramanga', 'Bogotá', 'Medellín', 'Cali', 'Cartagena', 'Barranquilla', 'Pereira', 'Desconocido'];
 
-// Comerciales options
-export const comercialesOptions = ['Todos', 'Victor Guzmán', 'Diana Margarita', 'Juan Sebastian', 'Mafe', 'John Comercial'];
+export type Option = {
+  value: string
+  label: string
+}
 
-// Prioridad options
-export const prioridadOptions = ['Todas', 'Alta', 'Media', 'Baja'];
+export const comercialesOptions: Option[] = [
+  { value: 'Juan Pérez', label: 'Juan Pérez' },
+  { value: 'María Gómez', label: 'María Gómez' },
+]
+
+export const prioridadOptions: Option[] = [
+  { value: 'Alta', label: 'Alta' },
+  { value: 'Media', label: 'Media' },
+  { value: 'Baja', label: 'Baja' },
+]
 
 // Priorities Mock Data
 export const prioritiesMock: Priority[] = [
