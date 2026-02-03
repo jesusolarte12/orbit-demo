@@ -77,6 +77,37 @@ export interface DashboardStats {
   contactados: number;
 }
 
+export interface Priority {
+  id: string;
+  nombre: string;
+  color: string;
+  descripcion: string;
+}
+
+export interface Sede {
+  id: string;
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  estado: boolean;
+}
+
+export interface CallState {
+  id: string;
+  nombre: string;
+  color: string;
+  descripcion: string;
+}
+
+export interface KnowledgeDocument {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  pdfUrl: string;
+  estado: 'activo' | 'inactivo';
+  fechaCreacion: string;
+}
+
 // Clientes Mock Data
 export const clientesMock: Cliente[] = [
   {
@@ -389,3 +420,66 @@ export const comercialesOptions = ['Todos', 'Victor Guzmán', 'Diana Margarita',
 
 // Prioridad options
 export const prioridadOptions = ['Todas', 'Alta', 'Media', 'Baja'];
+
+// Priorities Mock Data
+export const prioritiesMock: Priority[] = [
+  { id: '1', nombre: 'Alta', color: '#ef4444', descripcion: 'Clientes de máxima prioridad que requieren atención inmediata' },
+  { id: '2', nombre: 'Media', color: '#f59e0b', descripcion: 'Clientes con prioridad moderada' },
+  { id: '3', nombre: 'Baja', color: '#10b981', descripcion: 'Clientes con prioridad estándar' },
+];
+
+// Sedes Mock Data
+export const sedesMock: Sede[] = [
+  { id: '1', nombre: 'Bucaramanga', direccion: 'Calle 45 #27-50, Cabecera', telefono: '607 123 4567', estado: true },
+  { id: '2', nombre: 'Bogotá', direccion: 'Carrera 15 #93-40, Chicó', telefono: '601 234 5678', estado: true },
+  { id: '3', nombre: 'Medellín', direccion: 'Calle 10 #32-115, El Poblado', telefono: '604 345 6789', estado: true },
+  { id: '4', nombre: 'Cali', direccion: 'Avenida 6N #23-50, San Fernando', telefono: '602 456 7890', estado: true },
+  { id: '5', nombre: 'Cartagena', direccion: 'Centro Histórico, Calle 33 #8-65', telefono: '605 567 8901', estado: false },
+  { id: '6', nombre: 'Barranquilla', direccion: 'Calle 72 #54-49, Norte', telefono: '605 678 9012', estado: true },
+  { id: '7', nombre: 'Pereira', direccion: 'Carrera 7 #19-20, Centro', telefono: '606 789 0123', estado: true },
+];
+
+// Call States Mock Data
+export const callStatesMock: CallState[] = [
+  { id: '1', nombre: 'Contactado', color: '#10b981', descripcion: 'Cliente contactado exitosamente' },
+  { id: '2', nombre: 'No Contactado', color: '#6b7280', descripcion: 'No se ha logrado contactar al cliente' },
+  { id: '3', nombre: 'No Contesta', color: '#f59e0b', descripcion: 'El cliente no responde las llamadas' },
+  { id: '4', nombre: 'Número Equivocado', color: '#ef4444', descripcion: 'El número proporcionado es incorrecto' },
+  { id: '5', nombre: 'Buzón de Voz', color: '#8b5cf6', descripcion: 'La llamada fue a buzón de voz' },
+];
+
+// Knowledge Documents Mock Data
+export const knowledgeDocumentsMock: KnowledgeDocument[] = [
+  {
+    id: '1',
+    nombre: 'Manual de Ventas 2026',
+    descripcion: 'Guía completa de procesos de ventas y mejores prácticas',
+    pdfUrl: '/docs/manual-ventas-2026.pdf',
+    estado: 'activo',
+    fechaCreacion: '2026-01-15'
+  },
+  {
+    id: '2',
+    nombre: 'Políticas de Atención al Cliente',
+    descripcion: 'Documento con todas las políticas y procedimientos de atención',
+    pdfUrl: '/docs/politicas-atencion.pdf',
+    estado: 'activo',
+    fechaCreacion: '2026-01-10'
+  },
+  {
+    id: '3',
+    nombre: 'Catálogo de Productos',
+    descripcion: 'Catálogo actualizado con todos los productos y servicios disponibles',
+    pdfUrl: '/docs/catalogo-productos.pdf',
+    estado: 'activo',
+    fechaCreacion: '2026-01-05'
+  },
+  {
+    id: '4',
+    nombre: 'Guía de Preguntas Frecuentes',
+    descripcion: 'Respuestas a las preguntas más comunes de los clientes',
+    pdfUrl: '/docs/faq-guide.pdf',
+    estado: 'inactivo',
+    fechaCreacion: '2025-12-20'
+  },
+];

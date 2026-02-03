@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Users, 
-  MessageSquare, 
-  UserCog, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Users,
+  MessageSquare,
+  UserCog,
+  FileText,
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Settings
+  ChevronDown,
+  Settings,
+  Tag,
+  MapPin,
+  Phone,
+  BookOpen
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,22 +25,32 @@ interface SidebarProps {
 const navItems = [
   { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/clientes', icon: Users, label: 'Gestión Clientes' },
-  { path: '/seguimiento', icon: Sparkles, label: 'Seguimiento' },
   { path: '/chats', icon: MessageSquare, label: 'Chats' },
   { path: '/usuarios', icon: UserCog, label: 'Usuarios' },
   { path: '/plantillas', icon: FileText, label: 'Mensajes Masivos' },
 ];
 
+const configItems = [
+  { path: '/configuraciones/prioridades', icon: Tag, label: 'Prioridades' },
+  { path: '/configuraciones/sedes', icon: MapPin, label: 'Sedes' },
+  { path: '/configuraciones/estados-llamada', icon: Phone, label: 'Estados de Llamada' },
+  { path: '/configuraciones/conocimientos', icon: BookOpen, label: 'Conocimientos' },
+  { path: '/plantillas', icon: FileText, label: 'Plantillas' },
+];
+
 export function Sidebar({ children }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [configOpen, setConfigOpen] = useState(false);
   const location = useLocation();
 
-  const currentPage = navItems.find(item => location.pathname.startsWith(item.path));
+  const isConfigActive = location.pathname.startsWith('/configuraciones');
+  const currentPage = navItems.find(item => location.pathname.startsWith(item.path)) ||
+    (isConfigActive ? { icon: Settings, label: 'Configuraciones' } : null);
 
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside 
+      <aside
         className={cn(
           "fixed left-0 top-0 z-40 h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300",
           collapsed ? "w-16" : "w-64"
@@ -59,7 +74,7 @@ export function Sidebar({ children }: SidebarProps) {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname.startsWith(item.path);
-            
+
             return (
               <NavLink
                 key={item.path}
@@ -75,6 +90,60 @@ export function Sidebar({ children }: SidebarProps) {
               </NavLink>
             );
           })}
+
+          {/* Configuraciones Dropdown */}
+          <div>
+            <button
+              onClick={() => setConfigOpen(!configOpen)}
+              className={cn(
+                "orbit-nav-item w-full",
+                isConfigActive && "active",
+                collapsed && "justify-center px-2"
+              )}
+            >
+              <Settings className="h-5 w-5 flex-shrink-0" />
+              {!collapsed && (
+                <>
+                  <span className="flex-1 text-left">Configuraciones</span>
+                  <ChevronDown className={cn(
+                    "h-4 w-4 transition-transform",
+                    configOpen && "rotate-180"
+                  )} />
+                </>
+              )}
+            </button>
+
+            {/* Dropdown Items */}
+            {!collapsed && (
+              <div className={cn(
+                "grid transition-all duration-200 ease-in-out ml-4",
+                configOpen ? "grid-rows-[1fr] opacity-100 mt-1" : "grid-rows-[0fr] opacity-0"
+              )}>
+                <div className="overflow-hidden">
+                  <div className="space-y-1">
+                    {configItems.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = location.pathname === item.path;
+
+                      return (
+                        <NavLink
+                          key={item.path}
+                          to={item.path}
+                          className={cn(
+                            "orbit-nav-item text-sm",
+                            isActive && "active"
+                          )}
+                        >
+                          <Icon className="h-4 w-4 flex-shrink-0" />
+                          <span>{item.label}</span>
+                        </NavLink>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Collapse button */}

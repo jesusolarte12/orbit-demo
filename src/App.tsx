@@ -9,10 +9,13 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import GestionClientes from "./pages/GestionClientes";
-import SeguimientoClientes from "./pages/SeguimientoClientes";
 import Chats from "./pages/Chats";
 import Usuarios from "./pages/Usuarios";
 import Plantillas from "./pages/Plantillas";
+import Prioridades from "./pages/Prioridades";
+import Sedes from "./pages/Sedes";
+import EstadosLlamada from "./pages/EstadosLlamada";
+import Conocimientos from "./pages/Conocimientos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,7 +35,7 @@ const App = () => (
           {/* Public Routes */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          
+
           {/* Protected Routes with Sidebar */}
           <Route path="/dashboard" element={
             <AuthenticatedLayout>
@@ -42,11 +45,6 @@ const App = () => (
           <Route path="/clientes" element={
             <AuthenticatedLayout>
               <GestionClientes />
-            </AuthenticatedLayout>
-          } />
-          <Route path="/seguimiento" element={
-            <AuthenticatedLayout>
-              <SeguimientoClientes />
             </AuthenticatedLayout>
           } />
           <Route path="/chats" element={
@@ -64,7 +62,27 @@ const App = () => (
               <Plantillas />
             </AuthenticatedLayout>
           } />
-          
+          <Route path="/configuraciones/prioridades" element={
+            <AuthenticatedLayout>
+              <Prioridades />
+            </AuthenticatedLayout>
+          } />
+          <Route path="/configuraciones/sedes" element={
+            <AuthenticatedLayout>
+              <Sedes />
+            </AuthenticatedLayout>
+          } />
+          <Route path="/configuraciones/estados-llamada" element={
+            <AuthenticatedLayout>
+              <EstadosLlamada />
+            </AuthenticatedLayout>
+          } />
+          <Route path="/configuraciones/conocimientos" element={
+            <AuthenticatedLayout>
+              <Conocimientos />
+            </AuthenticatedLayout>
+          } />
+
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
